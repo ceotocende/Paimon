@@ -1,0 +1,34 @@
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const embedErr = require('../../module/EmbedErr.js');
+const color = require('../../module/color.js');
+const { hi } = require('../../module/gif.json');
+
+module.exports = {
+    data: new SlashCommandBuilder()
+        .setName('привет')
+        .setDescription('привет')
+        .addUserOption(option => option
+            .setName('юзер')
+            .setDescription('выберите пользователя')
+            .setRequired(true)),
+    async execute(interaction) {
+        const gif = hi[Math.floor(Math.random() * hi.length)];
+        const user = interaction.user;
+        const target = interaction.options.getUser('юзер');
+        const embed = new EmbedBuilder()
+            .setAuthor({ name: 'Команда: привет' })
+            .setDescription(`${user}, приветствует ${target}`)
+            .setImage(gif)
+            .setColor(color)
+            .setFooter({ iconURL: `${user.displayAvatarURL()}`, text: `${user.username}` });
+        if (target.bot === false && user.id != target.id) {
+            interaction.reply({
+                embeds: [embed]
+            });
+        } else if (target.bot === true || user.id === target.id) {
+            interaction.reply({
+                embeds: [embedErr]
+            });
+        }
+    }
+}
