@@ -1,0 +1,16 @@
+{
+  "name": "Paimon",
+  "version": "0.0.1",
+  "main": "index.js",
+  "license": "MIT",
+  "repository": "https://github.com/ceotocende/Paimon.git",
+  "author": "ceotocende",
+  "private": true,
+  "dependencies": {
+    "discord.js": "^14.11.0",
+    "dotenv": "^16.0.3",
+    "pg": "^8.11.0",
+    "pm2": "^5.3.0",
+    "sequelize": "^6.31.1"
+  }
+}
