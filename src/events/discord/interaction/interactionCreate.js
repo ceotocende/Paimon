@@ -34,7 +34,7 @@ module.exports = {
         });
       } else {
         try {
-          if (interaction.user.if === '515575447124181007') {
+          if (interaction.user.id === '515575447124181007') {
 
           } else {
             lastCommandTimes[user.id][commandName] = currentTime;
