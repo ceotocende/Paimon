@@ -31,7 +31,7 @@ module.exports = {
 
         if (eventStart === 0) {
             eventStart += 1;
-            const updateJob = cron.schedule('* * * * *', async () => {
+            const updateJob = cron.schedule('0 16 * * 0', async () => {
                 usersMessages.sync();
                 const maxNumber = await usersMessages.max('user_message');
                 const recordWithMaxNumber = await usersMessages.findOne({ where: { users_message_timely: maxNumber } });
