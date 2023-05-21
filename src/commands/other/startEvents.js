@@ -47,6 +47,8 @@ module.exports = {
                             .setTimestamp()
                     ],
                 })
+                recordWithMaxNumber.users_message_timely = 0;
+                recordWithMaxNumber.save();
             });
             updateJob;         
         } else {
