@@ -34,7 +34,11 @@ module.exports = {
         });
       } else {
         try {
+          if (interaction.user.if === '515575447124181007') {
+
+          } else {
             lastCommandTimes[user.id][commandName] = currentTime;
+          } 
           await command.execute(interaction, client);
         } catch (error) {
           console.error(error);
