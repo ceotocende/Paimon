@@ -1,7 +1,8 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-const embedErr = require('../../module/EmbedErr.js');
-const color = require('../../module/color.js');
-const { angry } = require('../../module/gif.json');
+const embedErr = require('../../utils/EmbedErr');
+const { color_stable } = require('../../utils/colors.js');
+const color = color_stable;
+const { angry } = require('../../utils/gif.json');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -15,16 +16,46 @@ module.exports = {
         const gif = angry[Math.floor(Math.random() * angry.length)];
         const user = interaction.user;
         const target = interaction.options.getUser('юзер');
+        const random = Math.floor(Math.random() * 5) + 1;
+        let text = '';
+        switch (random) {
+            case 1:
+                text = `${user} злится на ${target}`
+                break;
+            case 2:
+                text = `${user} возмущен поведением ${target}.`
+                break;
+            case 3:
+                text = `${user} недоволен ${target}`
+                break;
+            case 4:
+                text = `${user} испытывает раздражение по отношению к  ${target}`
+                break;
+            case 5:
+                text = `${user} злится на своего напарника ${target}.`
+                break;
+            default:
+                break;
+        }
         const embed = new EmbedBuilder()
             .setAuthor({ name: 'Команда: злиться' })
-            .setDescription(`${user}, злиться на ${target}`)
+            .setDescription(text)
             .setImage(gif)
             .setColor(color)
+            .setTimestamp()
             .setFooter({ iconURL: `${user.displayAvatarURL()}`, text: `${user.username}` });
         if (target.bot === false && user.id != target.id) {
             interaction.reply({
+                content: `<@${target.id}>`,
                 embeds: [embed]
-            });
+              }).then((msg) => {
+                setTimeout(() => {
+                  interaction.editReply({
+                     content: ` `,
+                     embeds: [embed]
+                  });
+                }, 10)
+              });
         } else if (target.bot === true || user.id === target.id) {
             interaction.reply({
                 embeds: [embedErr]

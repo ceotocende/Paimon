@@ -1,6 +1,8 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-const color = require('../../module/color.js');
-const { joy }  = require('../../module/gif.json');
+const embedErr = require('../../utils/EmbedErr');
+const { color_stable } = require('../../utils/colors.js');
+const color = color_stable;
+const { joy }  = require('../../utils/gif.json');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -14,6 +16,7 @@ module.exports = {
             .setAuthor({ name: 'Команда: радоваться' })
             .setDescription(`${user}, радуется`)
             .setColor(color)
+            .setTimestamp()
             .setImage(gif)
             .setFooter({ iconURL: `${user.displayAvatarURL()}`, text: `${user.username}` });
 

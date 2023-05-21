@@ -1,11 +1,11 @@
 async function loadCommands(client) {
     const fs = require("fs");
   
-    // if (client.commands) {
-    //     await client.commands.clear();
-    // } else {
-    //     client.commands = new Map();
-    // }
+    if (client.commands) {
+        await client.commands.clear();
+    } else {
+        client.commands = new Map();
+    }
   
     client.commandsArray = [];
   

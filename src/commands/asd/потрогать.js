@@ -1,7 +1,8 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-const embedErr = require('../../module/EmbedErr.js');
-const color = require('../../module/color.js');
-const { touch } = require('../../module/gif.json');
+const embedErr = require('../../utils/EmbedErr');
+const { color_stable } = require('../../utils/colors.js');
+const color = color_stable;
+const { touch } = require('../../utils/gif.json');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -20,11 +21,20 @@ module.exports = {
             .setDescription(`${user}, трогает ${target}`)
             .setImage(gif)
             .setColor(color)
+            .setTimestamp()
             .setFooter({ iconURL: `${user.displayAvatarURL()}`, text: `${user.username}` });
         if (target.bot === false && user.id != target.id) {
             interaction.reply({
+                content: `<@${target.id}>`,
                 embeds: [embed]
-            });
+              }).then((msg) => {
+                setTimeout(() => {
+                  interaction.editReply({
+                     content: ` `,
+                     embeds: [embed]
+                  });
+                }, 10)
+              });
         } else if (target.bot === true || user.id === target.id) {
             interaction.reply({
                 embeds: [embedErr]

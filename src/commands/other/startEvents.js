@@ -9,7 +9,7 @@ let eventStart = 0;
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('start_event')
+        .setName('start_event_paimon')
         .setDescription('start all event'),
     async execute(interaction, client) {
         const channel = client.channels.cache.get('980774671584731157');

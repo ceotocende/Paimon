@@ -34,11 +34,7 @@ module.exports = {
         });
       } else {
         try {
-          if (interaction.user.id) {
-
-          } else {
             lastCommandTimes[user.id][commandName] = currentTime;
-          }
           await command.execute(interaction, client);
         } catch (error) {
           console.error(error);

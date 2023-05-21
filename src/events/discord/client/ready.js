@@ -1,5 +1,5 @@
 const { loadCommands } = require("../../../functions/handlers/handleCommands");
-const sequelize = require('../../../database/dbsync.js');
+// const sequelize = require('../../../database/dbsync.js');
 
 module.exports = {
   name: "ready",
