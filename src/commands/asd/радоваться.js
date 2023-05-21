@@ -14,7 +14,7 @@ module.exports = {
 
             const embed = new EmbedBuilder()
             .setAuthor({ name: 'Команда: радоваться' })
-            .setDescription(`${user}, радуется`)
+            .setDescription(`${user} радуется`)
             .setColor(color)
             .setTimestamp()
             .setImage(gif)
