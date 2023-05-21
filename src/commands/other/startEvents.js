@@ -27,6 +27,22 @@ module.exports = {
 
         const c = cron.schedule('* * * * *', async () => {
             eventsCounter += 1;
+            usersMessages.sync();
+            const maxNumber = await usersMessages.max('users_message_timely');
+            const recordWithMaxNumber = await usersMessages.findOne({ where: { users_message_timely: maxNumber } });
+            console.log(maxNumber, recordWithMaxNumber)
+            channelTestBot.send({
+                embeds: [
+                    new EmbedBuilder()
+                        .setAuthor({ name: 'Кол-во сообщений' })
+                        .setDescription(`
+                        Недельный ивент подсчет сообщений! 
+                        Больше всего сообщений у <@${recordWithMaxNumber.user_id}> 
+                        кол-во сообщений ${recordWithMaxNumber.users_message_timely}
+                    `)
+                        .setTimestamp()
+                ],
+            })
         });
         c;
 

@@ -1,14 +1,17 @@
 module.exports = (sequelize, DataTypes) => {
     return sequelize.define('users', {
         user_id: {
-            type: DataTypes.STRING,
+            type: DataTypes.BIGINT,
             primaryKey: true
         },
         user_message: {
             type: DataTypes.INTEGER,
-            defaultValue: 1,
-            allowNull: false,
+            defaultValue: 1
         },
+        users_message_timely: {
+            type: DataTypes.INTEGER,
+            defaultValue: 1
+        }
     },
         {
             timestamps: false,
