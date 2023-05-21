@@ -26,44 +26,23 @@ module.exports = {
 
 
         const c = cron.schedule('* * * * *', async () => {
-
             eventsCounter += 1;
-            // const message = await channel.send({
-            //     embeds: [
-            //         new EmbedBuilder()
-            //             .setAuthor({ name: 'Кол-во сообщений' })
-            //             .setDescription(`Больше всего сообщений у <@${recordWithMaxNumber.user_id}> кол-во сообщений ${recordWithMaxNumber.user_message}`)
-            //             .setTimestamp()
-            //     ],
-            //     components: [row]
-            // })
-            // const collector = message.createMessageComponentCollector();
-
-            // collector.on('collect', (interaction) => {
-            //     const idCollector = interaction.customId;
-            //     if (idCollector === 'buttonForStopEventsAll') {
-            //         c.stop();
-            //         interaction.reply({
-            //             content: 'Ивенты отключены',
-            //             ephemeral: true
-            //         })
-            //     }
-            // })
         });
         c;
         if (eventStart === 0) {
             eventStart += 1;
-            const updateJob = cron.schedule('0 16 * * 0', async () => {
+            const updateJob = cron.schedule('* * * * *', async () => {
                 usersMessages.sync();
                 const maxNumber = await usersMessages.max('user_message');
-                const recordWithMaxNumber = await usersMessages.findOne({ where: { user_message: maxNumber } });
+                const recordWithMaxNumber = await usersMessages.findOne({ where: { users_message_timely: maxNumber } });
                 channel.send({
                     embeds: [
                         new EmbedBuilder()
                             .setAuthor({ name: 'Кол-во сообщений' })
                             .setDescription(`
-                        Больше всего сообщений у <@${recordWithMaxNumber.user_id}> 
-                        кол-во сообщений ${recordWithMaxNumber.user_message}
+                            Недельный ивент подсчет сообщений! 
+                            Больше всего сообщений у <@${recordWithMaxNumber.user_id}> 
+                            кол-во сообщений ${recordWithMaxNumber.users_message_timely}
                         `)
                             .setTimestamp()
                     ],
