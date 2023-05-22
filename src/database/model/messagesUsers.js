@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             defaultValue: 1
         },
-        users_message_timely: {
+        user_message_timely: {
             type: DataTypes.INTEGER,
             defaultValue: 1
         }

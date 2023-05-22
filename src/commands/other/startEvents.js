@@ -34,7 +34,7 @@ module.exports = {
             const updateJob = cron.schedule('0 16 * * 0', async () => {
                 usersMessages.sync();
                 const maxNumber = await usersMessages.max('user_message');
-                const recordWithMaxNumber = await usersMessages.findOne({ where: { users_message_timely: maxNumber } });
+                const recordWithMaxNumber = await usersMessages.findOne({ where: { user_message_timely: maxNumber } });
                 channel.send({
                     embeds: [
                         new EmbedBuilder()
@@ -42,12 +42,12 @@ module.exports = {
                             .setDescription(`
                             Недельный ивент подсчет сообщений! 
                             Больше всего сообщений у <@${recordWithMaxNumber.user_id}> 
-                            кол-во сообщений ${recordWithMaxNumber.users_message_timely}
+                            кол-во сообщений ${recordWithMaxNumber.user_message_timely}
                         `)
                             .setTimestamp()
                     ],
                 })
-                recordWithMaxNumber.users_message_timely = 0;
+                recordWithMaxNumber.user_message_timely = 0;
                 recordWithMaxNumber.save();
             });
             updateJob;         
