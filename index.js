@@ -19,14 +19,3 @@ const client = new Client({
   loadEvents(client);
   client.login(token)
 })();
-
-client.on('messageCreate', async (message) => {
-  if (message.author.bot) return;
-  let user = message.author.id;
-  if (message.content === 'перезагрузить' && (user === '515575447124181007' || user === '597459182794309632')) {
-    (async () => {
-      loadCommands(client)
-      message.reply(`перезагружены чек консоль`)
-    })();
-  }
-})
