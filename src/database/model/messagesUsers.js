@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    return sequelize.define('users', {
+    return sequelize.define('usersMessages', {
         user_id: {
             type: DataTypes.BIGINT,
             primaryKey: true
