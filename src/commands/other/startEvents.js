@@ -34,7 +34,7 @@ module.exports = {
             const updateJob = cron.schedule('0 16 * * 0', async () => {
                 usersMessages.sync();
                 const maxNumber = await usersMessages.max('user_message');
-                const recordWithMaxNumber = await usersMessages.findOne({ where: { users_message_timely: maxNumber } });
+                const recordWithMaxNumber = await usersMessages.findOne({ where: { user_message_timely: maxNumber } });
                 channel.send({
                     embeds: [
                         new EmbedBuilder()
