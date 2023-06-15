@@ -1,8 +1,8 @@
 const { Sequelize } = require('sequelize');
 const sequelize = require('./sequelize.js');
-const usersMessages = require('./model/messagesUsers.js')(sequelize, Sequelize.DataTypes);
+const Users = require('./model/Users.js')(sequelize, Sequelize.DataTypes);
 
-usersMessages.sync();
+Users.sync();
 
 try {
     sequelize.authenticate();

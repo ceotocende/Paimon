@@ -2,12 +2,12 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const embedErr = require('../../utils/EmbedErr');
 const { color_stable } = require('../../utils/colors.js');
 const color = color_stable;
-const { joy } = require('../../utils/gif.json');
+const { suicide } = require('../../utils/gif.json');
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('радоваться')
-        .setDescription('радоваться')
+        .setName('суецид')
+        .setDescription('суицид')
         .addStringOption(option => option
             .setName('контент')
             .setDescription('введите контент сообщения')
@@ -19,12 +19,12 @@ module.exports = {
             textContent = ('> **' + content + '**');;
         }
         const user = interaction.user;
-        const gif = joy[Math.floor(Math.random() * joy.length)];
+        const gif = suicide[Math.floor(Math.random() * suicide.length)];
 
         const embed = new EmbedBuilder()
-            .setAuthor({ name: 'Команда: радоваться' })
+            .setAuthor({ name: 'Команда: суицид' })
             .setDescription(`
-            ${user} радуется
+            ${user}, не стал принимать мир таким какой он есть и решил покончить жизнь самоубийством
             
             ${textContent}`)
             .setColor(color)

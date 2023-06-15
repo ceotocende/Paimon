@@ -4,7 +4,7 @@ const {
   InteractionType,
   EmbedBuilder,
 } = require("discord.js");
-const addBalance = require("../../../database/functions/addBalance");
+// const addBalance = require("../../../database/functions/addBalance");
 let lastCommandTimes = {};
 
 module.exports = {

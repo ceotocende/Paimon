@@ -11,14 +11,26 @@ module.exports = {
         .addUserOption(option => option
             .setName('юзер')
             .setDescription('выберите пользователя')
-            .setRequired(true)),
-    async execute(interaction) {
+            .setRequired(true))
+        .addStringOption(option => option
+                .setName('контент')
+                .setDescription('введите контент сообщения')
+                .setRequired(false)),
+        async execute(interaction) {
+            const content = interaction.options.getString('контент');
+            let textContent = '';
+            if (content) {
+                textContent = ('> **' + content + '**');;
+            }
         const gif = kus[Math.floor(Math.random() * kus.length)];
         const user = interaction.user;
         const target = interaction.options.getUser('юзер');
         const embed = new EmbedBuilder()
             .setAuthor({ name: 'Команда: кусь' })
-            .setDescription(`${user}, куснул(а) ${target}`)
+            .setDescription(`
+            ${user}, куснул(а) ${target}
+            
+            ${textContent}`)
             .setImage(gif)
             .setTimestamp()
             .setColor(color)

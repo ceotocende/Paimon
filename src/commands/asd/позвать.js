@@ -11,14 +11,26 @@ module.exports = {
         .addUserOption(option => option
             .setName('юзер')
             .setDescription('выберите пользователя')
-            .setRequired(true)),
+            .setRequired(true))
+        .addStringOption(option => option
+            .setName('контент')
+            .setDescription('введите контент сообщения')
+            .setRequired(false)),
     async execute(interaction) {
+        const content = interaction.options.getString('контент');
+        let textContent = '';
+        if (content) {
+            textContent = ('> **' + content + '**');;
+        }
         const gif = call[Math.floor(Math.random() * call.length)];
         const user = interaction.user;
         const target = interaction.options.getUser('юзер');
         const embed = new EmbedBuilder()
             .setAuthor({ name: 'Команда позвать' })
-            .setDescription(`${user}, позвал(а) ${target}`)
+            .setDescription(`
+            ${user}, позвал(а) ${target}
+            
+            ${textContent}`)
             .setImage(gif)
             .setColor(color)
             .setTimestamp()
@@ -27,14 +39,14 @@ module.exports = {
             interaction.reply({
                 content: `<@${target.id}>`,
                 embeds: [embed]
-              }).then((msg) => {
+            }).then((msg) => {
                 setTimeout(() => {
-                  interaction.editReply({
-                     content: ` `,
-                     embeds: [embed]
-                  });
+                    interaction.editReply({
+                        content: ` `,
+                        embeds: [embed]
+                    });
                 }, 10)
-              });
+            });
         } else if (target.bot === true || user.id === target.id) {
             interaction.reply({
                 embeds: [embedErr]
